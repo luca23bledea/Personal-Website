@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+body, html {
+  background: #fff;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+}
+
+@layer components {
+  .btn {
+    @apply inline-block font-sans font-semibold px-6 py-2 shadow-md border border-transparent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    border-radius: 0;
+  }
+  .btn-accent1,
+  .btn-accent2,
+  .btn-accent3,
+  .btn-accent4 {
+    background-color: #000;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-accent1 {
+    @apply bg-black text-white;
+    box-shadow: 8px 8px 0 0 #00FFF0;
+  }
+  .dark .btn-accent1 {
+    @apply bg-white text-black;
+    box-shadow: 8px 8px 0 0 #00FFF0;
+  }
+  .btn-accent1:hover {
+    background-color: #00FFF0;
+    color: #000;
+  }
+  
+  .btn-accent2 {
+    @apply bg-black text-white;
+    box-shadow: 8px 8px 0 0 #FFF500;
+  }
+  .dark .btn-accent2 {
+    @apply bg-white text-black;
+    box-shadow: 8px 8px 0 0 #FFF500; 
+  }
+  .btn-accent2:hover {
+    background-color: #FFF500;
+    color: #000;
+  }
+/* use color FF00B3 */
+  .btn-accent3 {
+    @apply bg-black text-white;
+    box-shadow: 8px 8px 0 0 #54FF00;
+  }
+  .dark .btn-accent3 {
+    @apply bg-white text-black;
+    box-shadow: 8px 8px 0 0 #54FF00;
+  }
+  .btn-accent3:hover {
+    background-color: #54FF00;
+    color: #000;
+  }
+
+  .btn-accent4 {
+    @apply bg-black text-white;
+    box-shadow: 8px 8px 0 0 #FF8000;
+  }
+  .dark .btn-accent4 {
+    @apply bg-white text-black;
+    box-shadow: 8px 8px 0 0 #FF8000;
+  }
+  .btn-accent4:hover {
+    background-color: #FF8000;
+    color: #000;
+  }
+ 
+}

@@ -1,0 +1,162 @@
+---
+import ProjectCard from '../../components/ProjectCard.astro';
+import SocialIcons from '../../components/SocialIcons.astro';
+import Base from '../../layouts/Base.astro';
+import '../../styles/output.css';
+import { getTranslation } from '../../i18n/utils';
+
+const t = getTranslation('en');
+---
+
+<Base title="Luca Bledea | Portfolio">
+  <!-- Intro Section -->
+  <section id="intro" class="min-h-screen flex flex-col justify-center items-center text-center px-4">
+    <h1 class="text-4xl font-bold mb-2">{t.intro.title}</h1>
+    <p class="text-lg max-w-xl">{t.intro.description}</p>
+  </section>
+  <script>
+    window.addEventListener('keydown', function (e) {
+      var up = true
+      if (e.key === 'Enter' && up) {
+        const targetdown = document.getElementById('scroll-target');
+        if (targetdown) {
+          targetdown.scrollIntoView({ behavior: 'smooth' });
+          up = !up;
+        }
+      }
+      if (e.key === 'Enter' && !up) {
+        const targetup = this.document.getElementById('intro');
+        if(targetup) {
+          targetup.scrollIntoView({ behavior: 'smooth' });
+          up = !up;
+        }
+      }
+    });
+  </script>
+
+  <section id="scroll-target" class="py-16 px-4">
+
+    <!-- Top Buttons -->
+    <section id="top-buttons">
+      <button id="theme-toggle" class="btn btn-accent4 mb-4">{t.buttons.toggleTheme}</button>
+      <button id="change-language" class="btn btn-accent4 mb-4">{t.buttons.toggleLanguage}</button> 
+
+      <!-- Language Change -->
+      <script>
+        window.addEventListener('DOMContentLoaded', function () {
+          const savedScroll = sessionStorage.getItem('scrollPosition');
+          if (savedScroll) {
+            window.scrollTo(0, parseInt(savedScroll));
+            sessionStorage.removeItem('scrollPosition');
+          }
+
+          const btn = document.getElementById('change-language');
+          if (!btn) return;
+          btn.addEventListener('click', () => {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            sessionStorage.setItem('scrollPosition', scrollPosition.toString());
+            window.location.href = window.location.pathname.replace('/en', '/ro');
+          });
+        });
+      </script>
+      
+      <!-- Theme Change  -->
+      <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          const toggleBtn = document.getElementById('theme-toggle');
+          const resumeLink = document.getElementById('resume-link') as HTMLAnchorElement | null;
+          if (!resumeLink) return;
+
+          function setInitialFromOSOrClass() {
+            if(!resumeLink) return;
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDarkClass = document.documentElement.classList.contains('dark');
+            const isDark = isDarkClass || (!isDarkClass && prefersDark);
+            resumeLink.href = isDark ? resumeLink.dataset.darkPdf || '' : resumeLink.dataset.lightPdf || '';
+          }
+
+          function updateResumeLink() {
+            if(!resumeLink) return;
+            const isDark = document.documentElement.classList.contains('dark');
+            resumeLink.href = isDark ? resumeLink.dataset.darkPdf || '' : resumeLink.dataset.lightPdf || '';
+          }
+
+          setInitialFromOSOrClass();
+
+          if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            updateResumeLink();
+            });
+          }
+
+          // keep in sync if system theme changes
+          if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setInitialFromOSOrClass);
+          }
+        });
+      </script>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 px-4">
+      <h2 class="text-3xl font-semibold mb-6 text-center">{t.projects.heading}</h2>
+      <div class="text-center mb-4">
+        <button id="toggle-project-btn" class="btn btn-accent1" data-show-text={t.projects.showBtn} data-hide-text={t.projects.hideBtn}>{t.projects.showBtn}</button>
+      </div>
+      <div id="projects-card" style="display:none;">
+        <ProjectCard title="Flask App" tech="Flask, SQLAlchemy" link="https://github.com/luca23bledea/ML-movie-recommender" />
+      </div>
+    </section>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('toggle-project-btn');
+        const icons = document.getElementById('projects-card');
+        if (!btn || !icons) return;
+        btn.addEventListener('click', function () {
+          const isHidden = icons.style.display === 'none' || icons.style.display === '';
+          icons.style.display = isHidden ? 'block' : 'none';
+          btn.textContent = isHidden ? (btn.dataset.hideText || '') : (btn.dataset.showText || '');
+        });
+      });
+    </script>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-16 px-4 text-center">
+      <h2 class="text-3xl font-semibold mb-4">{t.resume.heading}</h2>
+      <p class="mb-4">{t.resume.description}</p>
+      <a id="resume-link" 
+        href="Resources/Resume_light.pdf"
+        class="btn btn-accent2" 
+        data-light-pdf="Resources/Resume_light.pdf"
+        data-dark-pdf="Resources/Resume_dark.pdf">
+        {t.resume.button}
+      </a>
+
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 text-center">
+      <h2 class="text-3xl font-semibold mb-4">{t.contact.heading}</h2>
+      <p class="mb-6">{t.contact.description}</p>
+      <button id="toggle-social-btn" class="btn btn-accent3 mb-4" data-show-text={t.contact.showBtn} data-hide-text={t.contact.hideBtn}>{t.contact.showBtn}</button>
+      <div id="social-icons" style="display:none;">
+        <SocialIcons />
+      </div>
+    </section>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('toggle-social-btn');
+        const icons = document.getElementById('social-icons');
+        if (!btn || !icons) return;
+        btn.addEventListener('click', function () {
+          const isHidden = icons.style.display === 'none' || icons.style.display === '';
+          icons.style.display = isHidden ? 'block' : 'none';
+          btn.textContent = isHidden ? (btn.dataset.hideText || '') : (btn.dataset.showText || '');
+        });
+      });
+    </script>
+  </section>
+</Base>
