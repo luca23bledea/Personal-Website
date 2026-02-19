@@ -6,6 +6,7 @@ export const translations = {
     },
     projects: {
       heading: "Projects",
+      description: "Check out any of my projects below:",
       showBtn: "Show Projects",
       hideBtn: "Hide Projects"
     },
@@ -29,10 +30,11 @@ export const translations = {
   ro: {
     intro: {
       title: "Bună, sunt Luca Bledea",
-      description: "Student CSE pasionat de algoritmi, optimizare și cod curat. Bine ai venit pe portofoliul meu!"
+      description: "Student CSE pasionat de algoritmi, optimizare și cod curat. \nBine ai venit pe portofoliul meu!"
     },
     projects: {
       heading: "Proiecte",
+      description: "Vezi oricare dintre proiectele mele mai jos:",
       showBtn: "Arată Proiecte",
       hideBtn: "Ascunde Proiecte"
     },
@@ -49,7 +51,7 @@ export const translations = {
     },
     buttons: {
       toggleTheme: "Mod Întunecat",
-      toggleThemeW: "Mod Deschis",
+      toggleThemeW: "Mod Luminos",
       toggleLanguage: "Schimbă Limba"
     }
   }

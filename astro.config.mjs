@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import devtoolsJson from 'vite-plugin-devtools-json';
 
 export default defineConfig({
+  base: "/Personal-Website/",
   vite: { 
     plugins: [
       tailwindcss(), 

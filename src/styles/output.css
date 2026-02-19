@@ -712,6 +712,24 @@ video {
   color: #000;
 }
 
+#theme-toggle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: block;
+}
+
+#change-language {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: block;
+}
+
+.absolute {
+  position: absolute;
+}
+
 .relative {
   position: relative;
 }

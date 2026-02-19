@@ -9,36 +9,14 @@ const t = getTranslation('ro');
 ---
 
 <Base title="Luca Bledea | Portfolio">
+  
   <!-- Intro Section -->
   <section id="intro" class="min-h-screen flex flex-col justify-center items-center text-center px-4">
     <h1 class="text-4xl font-bold mb-2">{t.intro.title}</h1>
     <p class="text-lg max-w-xl">{t.intro.description}</p>
-  </section>
-  <script>
-    window.addEventListener('keydown', function (e) {
-      var up = true
-      if (e.key === 'Enter' && up) {
-        const targetdown = document.getElementById('scroll-target');
-        if (targetdown) {
-          targetdown.scrollIntoView({ behavior: 'smooth' });
-          up = !up;
-        }
-      }
-      if (e.key === 'Enter' && !up) {
-        const targetup = this.document.getElementById('intro');
-        if(targetup) {
-          targetup.scrollIntoView({ behavior: 'smooth' });
-          up = !up;
-        }
-      }
-    });
-  </script>
-
-  <section id="scroll-target" class="py-16 px-4">
-
     <!-- Top Buttons -->
     <section id="top-buttons">
-      <button id="theme-toggle" class="btn btn-accent4 mb-4">{t.buttons.toggleTheme}</button>
+      <button id="theme-toggle" class="btn btn-accent4 mb-4" data-show-text={t.buttons.toggleTheme} data-hide-text={t.buttons.toggleThemeW}>{t.buttons.toggleTheme}</button>
       <button id="change-language" class="btn btn-accent4 mb-4">{t.buttons.toggleLanguage}</button> 
 
       <!-- Language Change -->
@@ -85,27 +63,59 @@ const t = getTranslation('ro');
 
           if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            updateResumeLink();
+              document.documentElement.classList.toggle('dark');
+              updateResumeLink();
+              
+              // Update button text based on current theme
+              const isDark = document.documentElement.classList.contains('dark');
+              toggleBtn.textContent = isDark ? (toggleBtn.dataset.hideText || '') : (toggleBtn.dataset.showText || '');
             });
           }
 
-          // keep in sync if system theme changes
           if (window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setInitialFromOSOrClass);
           }
         });
       </script>
     </section>
+  </section>
+  <script>
+    window.addEventListener('keydown', function (e) {
+      var up = true
+      if (e.key === 'Enter' && up) {
+        const targetdown = document.getElementById('scroll-target');
+        if (targetdown) {
+          targetdown.scrollIntoView({ behavior: 'smooth' });
+          up = !up;
+        }
+      }
+      if (e.key === 'Enter' && !up) {
+        const targetup = this.document.getElementById('intro');
+        if(targetup) {
+          targetup.scrollIntoView({ behavior: 'smooth' });
+          up = !up;
+        }
+      }
+    });
+  </script>
+
+  <section id="scroll-target" class="py-15 px-4">
 
     <!-- Projects Section -->
     <section id="projects" class="py-16 px-4">
       <h2 class="text-3xl font-semibold mb-6 text-center">{t.projects.heading}</h2>
+      <p class="mb-6 text-center">{t.projects.description}</p>
       <div class="text-center mb-4">
         <button id="toggle-project-btn" class="btn btn-accent1" data-show-text={t.projects.showBtn} data-hide-text={t.projects.hideBtn}>{t.projects.showBtn}</button>
       </div>
       <div id="projects-card" style="display:none;">
-        <ProjectCard title="Flask App" tech="Flask, SQLAlchemy" link="https://github.com/luca23bledea/ML-movie-recommender" />
+        <!-- <ProjectCard title="Flask App" tech="Flask, SQLAlchemy" link="https://github.com/luca23bledea/ML-movie-recommender" /> -->
+          <ProjectCard
+            title="FX Tracker"
+            tech="Python • Streamlit • Forex API"
+            link="https://fx-tracker-project.streamlit.app/"
+            linkText="Open App"
+          />
       </div>
     </section>
 
@@ -127,13 +137,13 @@ const t = getTranslation('ro');
       <h2 class="text-3xl font-semibold mb-4">{t.resume.heading}</h2>
       <p class="mb-4">{t.resume.description}</p>
       <a id="resume-link" 
-        href="Resources/Resume_light.pdf"
-        class="btn btn-accent2" 
-        data-light-pdf="Resources/Resume_light.pdf"
-        data-dark-pdf="Resources/Resume_dark.pdf">
-        {t.resume.button}
-      </a>
-
+          href="../Resources/Resume_light.pdf"
+          class="btn btn-accent2" 
+          data-light-pdf="../Resources/Resume_light.pdf"
+          data-dark-pdf="../Resources/Resume_dark.pdf"
+          target="_blank" rel="noopener noreferrer">
+          {t.resume.button}
+        </a>
     </section>
 
     <!-- Contact Section -->
