@@ -5,7 +5,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="refresh" content="0; url=./en/" />
+  <title>Redirecting...</title>
+  <script>
+    // Detect if we're on GitHub Pages or localhost and redirect accordingly
+    const path = window.location.pathname;
+    const isGitHubPages = path.includes('/Personal-Website/');
+    
+    if (isGitHubPages) {
+      window.location.href = '/Personal-Website/en/';
+    } else {
+      window.location.href = '/en/';
+    }
+  </script>
 </head>
 <body></body>
 </html>
