@@ -9,3 +9,4 @@ This repository contains the source code for my personal website. It’s a fast,
 ## 🛠️ Tech Stack 
 - Astro
 - Tailwind CSS
+- TypeScript, JavaScript
